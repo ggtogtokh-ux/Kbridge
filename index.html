@@ -7,380 +7,441 @@
   <meta name="description" content="K-Bridge connects the Mongolian community in Korea." />
   <link rel="icon" href="appicon.jpg" type="image/jpeg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --orange: #E8613A;
-      --orange-dim: rgba(232,97,58,0.14);
-      --bg: #080808;
-      --surface: #111111;
-      --surface2: #181818;
-      --border: rgba(255,255,255,0.07);
-      --text: #FFFFFF;
-      --text-dim: rgba(255,255,255,0.55);
-      --text-muted: rgba(255,255,255,0.3);
+      --o: #E8613A;
+      --o2: rgba(232,97,58,0.12);
+      --o3: rgba(232,97,58,0.3);
+      --bg: #07070A;
+      --s1: #0F0F13;
+      --s2: #161619;
+      --b: rgba(255,255,255,0.06);
+      --t: #fff;
+      --t2: rgba(255,255,255,0.5);
+      --t3: rgba(255,255,255,0.25);
     }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
       background: var(--bg);
-      color: var(--text);
+      color: var(--t);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── NAV ── */
+    /* ═══════════════ NAV ═══════════════ */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; height: 68px;
-      background: rgba(8,8,8,0.9);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      gap: 20px;
+      padding: 0 24px;
+      background: rgba(7,7,10,0.85);
+      border-bottom: 1px solid var(--b);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
-    .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo img { height: 30px; object-fit: contain; }
+    .n-logo img { height: 26px; display: block; }
+    .n-center {
+      display: flex; align-items: center; gap: 28px;
+      position: absolute; left: 50%; transform: translateX(-50%);
+    }
+    .n-center a {
+      color: var(--t2); font-size: 14px; font-weight: 500;
+      text-decoration: none; transition: color .2s;
+      white-space: nowrap;
+    }
+    .n-center a:hover { color: var(--t); }
+    .n-right { display: flex; align-items: center; gap: 10px; }
 
-    .nav-links {
-      display: flex; align-items: center; gap: 32px; list-style: none; flex: 1; justify-content: center;
-    }
-    .nav-links a {
-      color: var(--text-dim); text-decoration: none;
-      font-size: 14px; font-weight: 500; transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-
-    /* Language switcher */
-    .lang-switcher {
+    /* Lang switcher */
+    .ls {
       display: flex; align-items: center;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 3px;
-      gap: 2px;
-      flex-shrink: 0;
+      background: var(--s2); border: 1px solid var(--b);
+      border-radius: 20px; padding: 3px; gap: 2px;
     }
-    .lang-btn {
+    .lb {
       background: none; border: none; cursor: pointer;
-      color: var(--text-muted);
-      font-size: 12px; font-weight: 700;
-      padding: 5px 11px; border-radius: 100px;
-      transition: background 0.18s, color 0.18s;
-      letter-spacing: 0.04em;
-      font-family: inherit;
+      color: var(--t3); font-size: 11px; font-weight: 700;
+      padding: 4px 10px; border-radius: 16px;
+      transition: background .18s, color .18s;
+      font-family: inherit; letter-spacing: .05em;
     }
-    .lang-btn:hover { color: var(--text-dim); }
-    .lang-btn.active {
-      background: var(--orange);
-      color: #fff;
-    }
+    .lb:hover { color: var(--t2); }
+    .lb.on { background: var(--o); color: #fff; }
 
-    .nav-cta {
-      background: var(--orange); color: #fff; border: none;
-      padding: 10px 22px; border-radius: 100px;
-      font-size: 14px; font-weight: 600; cursor: pointer;
+    .n-dl {
+      background: var(--o); color: #fff;
+      padding: 8px 18px; border-radius: 20px;
+      font-size: 13px; font-weight: 700;
       text-decoration: none; white-space: nowrap;
-      transition: opacity 0.2s, transform 0.2s;
-      flex-shrink: 0;
+      transition: opacity .2s, transform .2s;
     }
-    .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+    .n-dl:hover { opacity: .85; transform: translateY(-1px); }
 
-    /* ── HERO ── */
+    /* ═══════════════ HERO ═══════════════ */
     .hero {
-      position: relative; min-height: 100vh;
+      min-height: 100svh;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      text-align: center; padding: 120px 24px 80px;
-      overflow: hidden;
+      text-align: center;
+      padding: 90px 20px 60px;
+      position: relative; overflow: hidden;
     }
-    .blob {
+
+    /* Blobs */
+    .b1,.b2,.b3 {
       position: absolute; border-radius: 50%;
-      filter: blur(90px); pointer-events: none;
+      filter: blur(80px); pointer-events: none;
     }
-    .blob-1 {
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(232,97,58,0.2) 0%, transparent 65%);
-      top: -200px; left: 50%; transform: translateX(-50%);
-      animation: float1 10s ease-in-out infinite;
+    .b1 {
+      width: min(600px,120vw); height: min(600px,120vw);
+      background: radial-gradient(circle, rgba(232,97,58,.18) 0%, transparent 65%);
+      top: -20%; left: 50%; transform: translateX(-50%);
+      animation: fa 11s ease-in-out infinite;
     }
-    .blob-2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(232,97,58,0.1) 0%, transparent 70%);
-      bottom: 0; left: 5%; animation: float2 12s ease-in-out infinite;
+    .b2 {
+      width: min(300px,70vw); height: min(300px,70vw);
+      background: radial-gradient(circle, rgba(232,97,58,.1) 0%, transparent 70%);
+      bottom: 5%; left: 2%;
+      animation: fb 13s ease-in-out infinite;
     }
-    .blob-3 {
-      width: 350px; height: 350px;
-      background: radial-gradient(circle, rgba(232,97,58,0.08) 0%, transparent 70%);
-      top: 30%; right: 3%; animation: float2 9s ease-in-out infinite;
+    .b3 {
+      width: min(250px,60vw); height: min(250px,60vw);
+      background: radial-gradient(circle, rgba(232,97,58,.08) 0%, transparent 70%);
+      top: 25%; right: 2%;
+      animation: fb 9s .5s ease-in-out infinite;
     }
-    @keyframes float1 { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-30px)} }
-    @keyframes float2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+    @keyframes fa { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-24px)} }
+    @keyframes fb { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
 
-    .hero-grid {
-      position: absolute; inset: 0;
+    /* Grid */
+    .hg {
+      position: absolute; inset: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
-      background-size: 56px 56px;
-      -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 0%, black 40%, transparent 100%);
-      mask-image: radial-gradient(ellipse 85% 85% at 50% 0%, black 40%, transparent 100%);
-      pointer-events: none;
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, black 30%, transparent 100%);
+      mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, black 30%, transparent 100%);
     }
 
-    .hero-content { position: relative; z-index: 1; max-width: 860px; }
+    .hero-inner { position: relative; z-index: 1; max-width: 800px; width: 100%; }
 
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--orange-dim);
-      border: 1px solid rgba(232,97,58,0.28);
-      color: var(--orange);
-      padding: 7px 18px; border-radius: 100px;
-      font-size: 13px; font-weight: 600; letter-spacing: 0.03em;
-      margin-bottom: 32px;
-      animation: fadeUp 0.6s ease both;
+    /* Badge */
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--o2); border: 1px solid var(--o3);
+      color: var(--o); padding: 6px 16px; border-radius: 20px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      margin-bottom: 24px;
+      animation: fu .6s ease both;
     }
-    .hero-badge .dot {
-      width: 6px; height: 6px; background: var(--orange);
-      border-radius: 50%; animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+    .dot { width:5px;height:5px;background:var(--o);border-radius:50%; animation:pd 2s infinite; }
+    @keyframes pd { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
 
-    .hero h1 {
-      font-size: clamp(48px, 8vw, 92px);
-      font-weight: 900; line-height: 0.95;
-      letter-spacing: -0.045em; margin-bottom: 28px;
-      animation: fadeUp 0.6s 0.08s ease both;
+    h1 {
+      font-size: clamp(38px, 9vw, 90px);
+      font-weight: 900; line-height: .95;
+      letter-spacing: -0.04em;
+      margin-bottom: 20px;
+      animation: fu .6s .08s ease both;
     }
-    .highlight {
-      background: linear-gradient(130deg, #E8613A 0%, #FF9560 60%, #E8613A 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    .hl {
+      background: linear-gradient(130deg, #E8613A 0%, #FF9560 55%, #E8613A 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      animation: hla 4s linear infinite;
     }
-    .hero-sub {
-      font-size: clamp(16px, 2.2vw, 20px); color: var(--text-dim);
-      max-width: 560px; margin: 0 auto 48px;
+    @keyframes hla { 0%{background-position:0%} 100%{background-position:200%} }
+
+    .sub {
+      font-size: clamp(14px, 2.5vw, 18px);
+      color: var(--t2); max-width: 500px;
+      margin: 0 auto 36px;
       line-height: 1.72; font-weight: 400;
-      animation: fadeUp 0.6s 0.16s ease both;
+      animation: fu .6s .16s ease both;
     }
 
-    /* Store buttons */
-    .store-buttons {
+    /* Buttons */
+    .btns {
       display: flex; align-items: center; justify-content: center;
-      gap: 14px; flex-wrap: wrap;
-      animation: fadeUp 0.6s 0.24s ease both;
+      gap: 12px; flex-wrap: wrap;
+      animation: fu .6s .24s ease both;
     }
-    .btn-store {
-      display: flex; align-items: center; gap: 12px;
-      padding: 13px 26px; border-radius: 14px;
-      text-decoration: none;
-      transition: transform 0.22s, box-shadow 0.22s;
+    .bs {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 22px; border-radius: 12px;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
+      border: 1px solid transparent;
     }
-    .btn-store:hover { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-    .btn-apple { background: #fff; color: #000; }
-    .btn-google { background: var(--surface2); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
-    .btn-store-text small {
-      display: block; font-size: 10px; font-weight: 600;
-      opacity: 0.55; letter-spacing: 0.06em; text-transform: uppercase;
-    }
-    .btn-store-text strong {
-      display: block; font-size: 17px; font-weight: 800;
-      margin-top: 1px; letter-spacing: -0.02em;
-    }
+    .bs:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+    .ba { background: #fff; color: #000; }
+    .bg { background: var(--s2); color: #fff; border-color: var(--b); }
+    .bs-t small { display:block; font-size:9px; font-weight:600; opacity:.5; letter-spacing:.07em; text-transform:uppercase; }
+    .bs-t strong { display:block; font-size:15px; font-weight:800; letter-spacing:-.02em; }
 
     /* Phone mockup */
-    .hero-visual {
-      margin-top: 80px; position: relative; z-index: 1;
-      animation: fadeUp 0.8s 0.32s ease both;
+    .phones {
+      margin-top: 56px;
+      display: flex; align-items: flex-end; justify-content: center; gap: 14px;
+      animation: fu .8s .32s ease both;
     }
-    .phones-row { display: flex; align-items: flex-end; justify-content: center; gap: 20px; }
-    .phone {
-      border-radius: 36px; border: 2px solid rgba(255,255,255,0.1);
-      background: linear-gradient(145deg, #242424, #161616);
+    .ph {
+      border-radius: clamp(24px,5vw,34px);
+      border: 1.5px solid rgba(255,255,255,.1);
+      background: linear-gradient(145deg,#222,#141414);
       overflow: hidden; position: relative;
-      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
-    .phone-main {
-      width: 220px; height: 440px;
-      box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 80px rgba(232,97,58,0.12);
-      animation: phoneFloat 6s ease-in-out infinite;
+    .ph-main {
+      width: clamp(160px,42vw,210px);
+      height: clamp(320px,84vw,420px);
+      box-shadow: 0 30px 80px rgba(0,0,0,.7), 0 0 60px rgba(232,97,58,.12);
+      animation: pf 6s ease-in-out infinite;
     }
-    .phone-side { width: 175px; height: 350px; opacity: 0.5; filter: blur(1px); }
-    .phone-left  { animation: phoneFloat 7s 0.5s ease-in-out infinite; }
-    .phone-right { animation: phoneFloat 8s 1s ease-in-out infinite; }
-    @keyframes phoneFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
-    .phone-screen {
-      position: absolute; inset: 10px; border-radius: 28px;
-      background: var(--orange);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 10px;
+    .ph-side {
+      width: clamp(130px,33vw,168px);
+      height: clamp(260px,66vw,336px);
+      opacity: .4; filter: blur(1.5px);
     }
-    .phone-side .phone-screen { inset: 8px; border-radius: 24px; background: #1a1a1a; }
-    .phone-app-icon { width: 88px; height: 88px; border-radius: 20px; object-fit: cover; }
-    .phone-app-label { color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+    .ph-l { animation: pf 7s .4s ease-in-out infinite; }
+    .ph-r { animation: pf 8s .8s ease-in-out infinite; }
+    @keyframes pf { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    .ph-screen {
+      position:absolute; inset:8px; border-radius:clamp(18px,4vw,27px);
+      background: var(--o);
+      display:flex; align-items:center; justify-content:center;
+      flex-direction:column; gap:8px;
+    }
+    .ph-side .ph-screen { background:#1a1a1a; inset:6px; }
+    .ph-ic { width:76px; height:76px; border-radius:18px; object-fit:cover; }
+    .ph-nm { color:rgba(255,255,255,.9); font-size:14px; font-weight:800; letter-spacing:-.02em; }
 
-    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fu { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
-    /* ── STATS ── */
-    .stats-bar {
+    /* ═══════════════ STATS ═══════════════ */
+    .stats {
+      display: flex; align-items: stretch;
+      border-top: 1px solid var(--b); border-bottom: 1px solid var(--b);
+      background: var(--s1); overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .stats::-webkit-scrollbar { display: none; }
+    .st {
+      text-align: center; padding: 28px 36px;
+      flex: 1; min-width: 120px;
+      flex-shrink: 0;
+    }
+    .st + .st { border-left: 1px solid var(--b); }
+    .sn { font-size: clamp(28px,5vw,38px); font-weight: 900; letter-spacing: -.04em; color: var(--o); line-height: 1; }
+    .sl { font-size: 10px; color: var(--t3); margin-top: 5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+
+    /* ═══════════════ SECTION BASE ═══════════════ */
+    .sec { position: relative; z-index: 1; }
+    .tg {
+      display: inline-block; color: var(--o);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .h2 { font-size: clamp(28px,5vw,50px); font-weight: 900; letter-spacing: -.035em; line-height: 1.08; margin-bottom: 16px; }
+    .p { font-size: clamp(14px,2vw,16px); color: var(--t2); line-height: 1.72; }
+
+    /* ═══════════════ FEATURES ═══════════════ */
+    .feat { padding: clamp(60px,10vw,100px) clamp(16px,5vw,48px); }
+    .feat-h { text-align: center; max-width: 560px; margin: 0 auto clamp(40px,8vw,64px); }
+    .fg {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1px; max-width: 1080px; margin: 0 auto;
+      border: 1px solid var(--b); border-radius: 20px;
+      overflow: hidden; background: var(--b);
+    }
+    .fc {
+      background: var(--s1); padding: clamp(24px,4vw,40px) clamp(20px,3vw,32px);
+      position: relative; overflow: hidden;
+      transition: background .25s;
+    }
+    .fc::before {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(circle at 20% 20%, rgba(232,97,58,.1), transparent 55%);
+      opacity:0; transition:opacity .3s;
+    }
+    .fc:hover { background: #141418; }
+    .fc:hover::before { opacity: 1; }
+    .fi {
+      width: 46px; height: 46px; border-radius: 13px;
+      background: var(--o2); border: 1px solid rgba(232,97,58,.2);
+      display:flex; align-items:center; justify-content:center;
+      font-size: 22px; margin-bottom: 16px;
       position: relative; z-index: 1;
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      background: var(--surface);
-      display: flex; align-items: stretch; justify-content: center;
     }
-    .stat-item { text-align: center; padding: 36px 48px; flex: 1; max-width: 240px; }
-    .stat-item + .stat-item { border-left: 1px solid var(--border); }
-    .stat-num { font-size: 40px; font-weight: 900; letter-spacing: -0.04em; color: var(--orange); line-height: 1; }
-    .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+    .fc h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; letter-spacing: -.02em; position:relative;z-index:1; }
+    .fc p { font-size: 13px; color: var(--t2); line-height: 1.65; position:relative;z-index:1; }
 
-    /* ── COMMON SECTION ── */
-    section { position: relative; z-index: 1; }
-    .tag {
-      display: inline-block; color: var(--orange);
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px;
+    /* ═══════════════ HOW ═══════════════ */
+    .how {
+      padding: clamp(60px,10vw,100px) clamp(16px,5vw,48px);
+      border-top: 1px solid var(--b);
+      background: var(--s1);
     }
-    .s-title { font-size: clamp(32px, 5vw, 54px); font-weight: 900; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 20px; }
-    .s-desc { font-size: 17px; color: var(--text-dim); line-height: 1.72; }
-
-    /* ── FEATURES ── */
-    .features { padding: 110px 48px; }
-    .features-top { text-align: center; max-width: 600px; margin: 0 auto 72px; }
-    .features-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2px; max-width: 1120px; margin: 0 auto;
-      border: 1px solid var(--border); border-radius: 24px;
-      overflow: hidden; background: var(--border);
+    .how-w {
+      max-width: 1080px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(40px,8vw,100px); align-items: center;
     }
-    .feat-card {
-      background: var(--surface); padding: 44px 36px;
-      transition: background 0.25s; position: relative; overflow: hidden;
-    }
-    .feat-card::after {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 15% 15%, rgba(232,97,58,0.1), transparent 55%);
-      opacity: 0; transition: opacity 0.3s;
-    }
-    .feat-card:hover { background: #161616; }
-    .feat-card:hover::after { opacity: 1; }
-    .feat-icon {
-      width: 54px; height: 54px; background: var(--orange-dim);
-      border: 1px solid rgba(232,97,58,0.22); border-radius: 15px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px; margin-bottom: 22px; position: relative; z-index: 1;
-    }
-    .feat-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.02em; position: relative; z-index: 1; }
-    .feat-card p { font-size: 14px; color: var(--text-dim); line-height: 1.68; position: relative; z-index: 1; }
-
-    /* ── HOW ── */
-    .how { padding: 110px 48px; border-top: 1px solid var(--border); background: var(--surface); }
-    .how-wrap { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
     .steps { display: flex; flex-direction: column; }
-    .step { display: flex; gap: 24px; padding: 32px 0; border-bottom: 1px solid var(--border); }
+    .step {
+      display: flex; gap: 20px;
+      padding: clamp(20px,4vw,28px) 0;
+      border-bottom: 1px solid var(--b);
+    }
     .step:first-child { padding-top: 0; }
     .step:last-child { border-bottom: none; padding-bottom: 0; }
-    .step-num {
-      width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%;
-      border: 2px solid var(--orange); display: flex; align-items: center; justify-content: center;
-      font-size: 15px; font-weight: 800; color: var(--orange);
+    .snum {
+      width: 38px; height: 38px; flex-shrink: 0;
+      border-radius: 50%; border: 2px solid var(--o);
+      display:flex; align-items:center; justify-content:center;
+      font-size: 14px; font-weight: 800; color: var(--o);
     }
-    .step h4 { font-size: 18px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em; }
-    .step p { font-size: 14px; color: var(--text-dim); line-height: 1.68; }
-    .how-visual { display: flex; align-items: center; justify-content: center; }
-    .icon-glow-wrap { position: relative; }
-    .icon-glow-wrap::before {
-      content: ''; position: absolute; inset: -50px;
-      background: radial-gradient(circle, rgba(232,97,58,0.22) 0%, transparent 70%);
-      border-radius: 50%; animation: glowPulse 3s ease-in-out infinite;
+    .step h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; letter-spacing: -.02em; }
+    .step p { font-size: 13px; color: var(--t2); line-height: 1.65; }
+    .how-v { display:flex; align-items:center; justify-content:center; }
+    .gw { position: relative; }
+    .gw::before {
+      content:''; position:absolute; inset:-40px; border-radius:50%;
+      background: radial-gradient(circle, rgba(232,97,58,.2) 0%, transparent 65%);
+      animation: gp 3s ease-in-out infinite;
     }
-    @keyframes glowPulse { 0%,100%{opacity:0.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.06)} }
-    .big-icon {
-      width: 240px; height: 240px; border-radius: 56px; object-fit: cover;
+    @keyframes gp { 0%,100%{opacity:.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.05)} }
+    .big-ic {
+      width: clamp(160px,25vw,220px); height: clamp(160px,25vw,220px);
+      border-radius: clamp(36px,8vw,52px); object-fit: cover;
       position: relative; z-index: 1;
-      box-shadow: 0 50px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.07);
+      box-shadow: 0 40px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.07);
     }
 
-    /* ── COMMUNITY ── */
-    .community { padding: 110px 48px; border-top: 1px solid var(--border); }
-    .community-wrap { max-width: 1120px; margin: 0 auto; text-align: center; }
-    .comm-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 60px; }
-    .comm-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 20px; padding: 36px 28px; text-align: left;
-      transition: transform 0.22s, border-color 0.22s, background 0.22s;
+    /* ═══════════════ COMMUNITY ═══════════════ */
+    .comm { padding: clamp(60px,10vw,100px) clamp(16px,5vw,48px); border-top: 1px solid var(--b); }
+    .comm-w { max-width: 1080px; margin: 0 auto; text-align: center; }
+    .cc { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: clamp(32px,6vw,52px); }
+    .ccard {
+      background: var(--s1); border: 1px solid var(--b);
+      border-radius: 18px; padding: clamp(24px,4vw,32px) clamp(20px,3vw,26px);
+      text-align: left; transition: transform .22s, border-color .22s, background .22s;
     }
-    .comm-card:hover { transform: translateY(-5px); border-color: rgba(232,97,58,0.3); background: #151515; }
-    .comm-emoji { font-size: 36px; margin-bottom: 20px; }
-    .comm-card h4 { font-size: 17px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.02em; }
-    .comm-card p { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+    .ccard:hover { transform: translateY(-4px); border-color: rgba(232,97,58,.28); background: var(--s2); }
+    .cem { font-size: 30px; margin-bottom: 16px; }
+    .ccard h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; letter-spacing: -.02em; }
+    .ccard p { font-size: 13px; color: var(--t2); line-height: 1.65; }
 
-    /* ── CLUBS ── */
-    .clubs-section { padding: 110px 48px; border-top: 1px solid var(--border); background: var(--surface); }
-    .clubs-wrap { max-width: 900px; margin: 0 auto; }
-    .clubs-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-    .club-pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 100px; padding: 12px 24px;
-      font-size: 15px; font-weight: 600; color: var(--text);
-      transition: border-color 0.22s, background 0.22s, transform 0.22s;
-      cursor: default;
-    }
-    .club-pill:hover { border-color: rgba(232,97,58,0.5); background: rgba(232,97,58,0.08); transform: translateY(-3px); }
+    /* ═══════════════ CLUBS MARQUEE ═══════════════ */
+    .clubs { padding: clamp(60px,10vw,100px) 0; border-top: 1px solid var(--b); background: var(--s1); overflow: hidden; }
+    .clubs-h { text-align: center; padding: 0 clamp(16px,5vw,48px); margin-bottom: clamp(32px,6vw,52px); }
 
-    /* ── CTA ── */
-    .cta {
-      padding: 130px 48px; text-align: center;
-      position: relative; overflow: hidden; border-top: 1px solid var(--border);
-    }
-    .cta::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(232,97,58,0.16) 0%, transparent 70%);
+    .marquee-wrap { position: relative; }
+    .marquee-wrap::before,
+    .marquee-wrap::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: clamp(40px,8vw,100px); z-index: 2;
       pointer-events: none;
     }
-    .cta-wrap { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
-    .cta-logo { height: 44px; object-fit: contain; margin-bottom: 40px; }
-    .cta h2 { font-size: clamp(38px, 6vw, 68px); font-weight: 900; letter-spacing: -0.045em; line-height: 1.0; margin-bottom: 20px; }
-    .cta p { font-size: 18px; color: var(--text-dim); margin-bottom: 48px; line-height: 1.6; }
+    .marquee-wrap::before { left: 0; background: linear-gradient(90deg, var(--s1), transparent); }
+    .marquee-wrap::after  { right: 0; background: linear-gradient(-90deg, var(--s1), transparent); }
 
-    /* ── FOOTER ── */
+    .marquee-track {
+      display: flex; gap: 12px;
+      animation: mq 28s linear infinite;
+      width: max-content;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
+      background: var(--bg); border: 1px solid var(--b);
+      border-radius: 100px; padding: 11px 22px;
+      font-size: 14px; font-weight: 600; white-space: nowrap;
+      transition: border-color .2s, background .2s;
+      cursor: default;
+    }
+    .pill:hover { border-color: rgba(232,97,58,.4); background: var(--o2); }
+
+    /* ═══════════════ CTA ═══════════════ */
+    .cta {
+      padding: clamp(80px,14vw,120px) clamp(16px,5vw,48px);
+      text-align: center; position: relative; overflow: hidden;
+      border-top: 1px solid var(--b);
+    }
+    .cta::before {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(232,97,58,.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-w { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .cta-logo { height: 36px; object-fit: contain; margin-bottom: 32px; }
+    .cta .h2 { font-size: clamp(32px,7vw,62px); margin-bottom: 16px; }
+    .cta .p { font-size: clamp(14px,2vw,17px); margin-bottom: 36px; }
+
+    /* ═══════════════ FOOTER ═══════════════ */
     footer {
-      border-top: 1px solid var(--border); padding: 36px 48px;
+      border-top: 1px solid var(--b); padding: clamp(24px,5vw,36px) clamp(16px,5vw,48px);
       display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 20px;
+      flex-wrap: wrap; gap: 16px;
     }
-    footer .f-logo { height: 26px; object-fit: contain; }
-    .f-links { display: flex; align-items: center; gap: 28px; }
-    .f-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
-    .f-links a:hover { color: var(--text-dim); }
-    .f-copy { color: var(--text-muted); font-size: 13px; }
+    footer img { height: 22px; }
+    .fl { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+    .fl a { color:var(--t3); text-decoration:none; font-size:12px; font-weight:500; transition:color .2s; }
+    .fl a:hover { color:var(--t2); }
+    .fc2 { color:var(--t3); font-size:12px; }
 
-    /* ── SCROLL REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.in { opacity: 1; transform: translateY(0); }
+    /* ═══════════════ REVEAL ═══════════════ */
+    .rv { opacity:0; transform:translateY(24px); transition:opacity .65s ease,transform .65s ease; }
+    .rv.in { opacity:1; transform:translateY(0); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1000px) {
-      nav { padding: 0 20px; gap: 12px; }
-      .nav-links { display: none; }
-      .features { padding: 72px 24px; }
-      .features-grid { grid-template-columns: 1fr 1fr; border-radius: 16px; }
-      .how { padding: 72px 24px; }
-      .how-wrap { grid-template-columns: 1fr; gap: 56px; }
-      .how-visual { order: -1; }
-      .community { padding: 72px 24px; }
-      .comm-cards { grid-template-columns: 1fr; }
-      .clubs-section { padding: 72px 24px; }
-      .cta { padding: 80px 24px; }
-      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
-      .stats-bar { overflow-x: auto; }
-      .stat-item { padding: 28px 32px; min-width: 130px; }
-      .phone-side { display: none; }
+    /* ═══════════════ RESPONSIVE ═══════════════ */
+
+    /* Tablet */
+    @media (max-width: 860px) {
+      .n-center { display: none; }
+      .n-dl { display: none; }
+      .fg { grid-template-columns: repeat(2,1fr); border-radius: 16px; }
+      .how-w { grid-template-columns: 1fr; }
+      .how-v { order: -1; }
+      .cc { grid-template-columns: 1fr; }
     }
-    @media (max-width: 600px) {
-      .features-grid { grid-template-columns: 1fr; }
-      .hero h1 { letter-spacing: -0.03em; }
+
+    /* Mobile */
+    @media (max-width: 540px) {
+      nav { padding: 0 16px; height: 56px; }
+      .n-logo img { height: 22px; }
+      .lb { font-size: 10px; padding: 3px 8px; }
+
+      .hero { padding: 76px 16px 48px; }
+      h1 { font-size: clamp(32px, 11vw, 52px); letter-spacing: -.03em; }
+      .sub { font-size: 14px; }
+
+      .ph-side { display: none; }
+      .ph-main { width: 180px; height: 360px; }
+
+      .stats { justify-content: flex-start; }
+      .st { padding: 22px 24px; min-width: 110px; }
+      .sn { font-size: 26px; }
+
+      .feat { padding: 48px 16px; }
+      .fg { grid-template-columns: 1fr; border-radius: 14px; }
+
+      .how { padding: 48px 16px; }
+      .comm { padding: 48px 16px; }
+      .clubs { padding: 48px 0; }
+      .cta { padding: 60px 16px; }
+      footer { padding: 24px 16px; flex-direction: column; align-items: flex-start; }
+
+      .bs { padding: 10px 18px; }
+      .bs-t strong { font-size: 14px; }
     }
   </style>
 </head>
@@ -388,180 +449,179 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo"><img src="logo.png" alt="K-Bridge" /></a>
-  <ul class="nav-links">
-    <li><a href="#features" data-i18n="nav_features">Боломжууд</a></li>
-    <li><a href="#how"      data-i18n="nav_how">Яаж ажилладаг</a></li>
-    <li><a href="#community" data-i18n="nav_community">Нийгэмлэг</a></li>
-    <li><a href="privacy.html" data-i18n="nav_privacy">Нууцлал</a></li>
-  </ul>
-  <div style="display:flex;align-items:center;gap:12px;flex-shrink:0;">
-    <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLang('mn')">MN</button>
-      <button class="lang-btn"        onclick="setLang('ko')">KO</button>
-      <button class="lang-btn"        onclick="setLang('en')">EN</button>
+  <a href="#" class="n-logo"><img src="logo.png" alt="K-Bridge" /></a>
+  <div class="n-center">
+    <a href="#features" data-i18n="n_feat">Боломжууд</a>
+    <a href="#how"      data-i18n="n_how">Яаж ажилладаг</a>
+    <a href="#comm"     data-i18n="n_comm">Нийгэмлэг</a>
+    <a href="privacy.html" data-i18n="n_priv">Нууцлал</a>
+  </div>
+  <div class="n-right">
+    <div class="ls">
+      <button class="lb on" onclick="L('mn')">MN</button>
+      <button class="lb"    onclick="L('ko')">KO</button>
+      <button class="lb"    onclick="L('en')">EN</button>
     </div>
-    <a href="#download" class="nav-cta" data-i18n="nav_download">Апп татах</a>
+    <a href="#dl" class="n-dl" data-i18n="n_dl">Апп татах</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span class="dot"></span>
-      <span data-i18n="hero_badge">Солонгост Монголчуудын Апп</span>
-    </div>
+  <div class="b1"></div><div class="b2"></div><div class="b3"></div>
+  <div class="hg"></div>
+  <div class="hero-inner">
+    <div class="badge"><span class="dot"></span><span data-i18n="h_badge">Солонгост Монголчуудын Апп</span></div>
     <h1>
-      <span data-i18n="hero_line1">Монголчуудын</span><br/>
-      <span class="highlight" data-i18n="hero_line2">Нийгэмлэг</span><br/>
-      <span data-i18n="hero_line3">Солонгост</span>
+      <span data-i18n="h1">Монголчуудын</span><br/>
+      <span class="hl" data-i18n="h2">Нийгэмлэг</span><br/>
+      <span data-i18n="h3">Солонгост</span>
     </h1>
-    <p class="hero-sub" data-i18n="hero_sub">K-Bridge нь Солонгост амьдарч буй монголчуудыг холбодог — эвент хайж, клубд элсэж, нийгэмлэгтэйгээ чатлаж, удаан үргэлжлэх найрамдал бий болго.</p>
-
-    <div class="store-buttons" id="download">
-      <a href="https://apps.apple.com/app/id000000000" class="btn-store btn-apple" target="_blank">
-        <svg width="22" height="27" viewBox="0 0 814 1000" fill="#000"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-43.4-150.3-109.2C67.3 790 0 663 0 541.8c0-194.3 127.4-297.5 252.7-297.5 66.1 0 121.2 43.4 162.6 43.4 39.5 0 101.1-46 176.3-46 28.5 0 130.9 2.6 198.3 99.2zm-234-181.5c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z"/></svg>
-        <div class="btn-store-text">
-          <small data-i18n="apple_sub">Татаж авах</small>
-          <strong>App Store</strong>
-        </div>
+    <p class="sub" data-i18n="h_sub">K-Bridge нь Солонгост амьдарч буй монголчуудыг холбодог — эвент хайж, клубд элсэж, нийгэмлэгтэйгээ чатлаж, жинхэнэ найрамдал бий болго.</p>
+    <div class="btns" id="dl">
+      <a href="https://apps.apple.com/app/id000000000" class="bs ba" target="_blank">
+        <svg width="20" height="24" viewBox="0 0 814 1000" fill="#000"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-43.4-150.3-109.2C67.3 790 0 663 0 541.8c0-194.3 127.4-297.5 252.7-297.5 66.1 0 121.2 43.4 162.6 43.4 39.5 0 101.1-46 176.3-46 28.5 0 130.9 2.6 198.3 99.2zm-234-181.5c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z"/></svg>
+        <div class="bs-t"><small data-i18n="a_sm">Татаж авах</small><strong>App Store</strong></div>
       </a>
-      <a href="#" class="btn-store btn-google">
-        <svg width="22" height="24" viewBox="0 0 512 512" fill="none">
-          <path d="M48 428.3V83.7a20 20 0 0 1 30.6-16.9L434 251.1a20 20 0 0 1 0 9.8L78.6 445.2A20 20 0 0 1 48 428.3z" fill="#4FC3F7"/>
-          <path d="M288.5 256 48 428.3A20 20 0 0 0 78.6 445L339 299.5 288.5 256z" fill="#F44336"/>
-          <path d="M288.5 256 339 212.5 78.6 67A20 20 0 0 0 48 83.7L288.5 256z" fill="#4CAF50"/>
-          <path d="M339 212.5l95 54.9a20 20 0 0 1 0 17.2l-95 55.4L288.5 256l50.5-43.5z" fill="#FFC107"/>
+      <a href="#" class="bs bg">
+        <svg width="20" height="22" viewBox="0 0 512 512" fill="none">
+          <path d="M48 428V84a20 20 0 0 1 31-17L434 251a20 20 0 0 1 0 10L79 445A20 20 0 0 1 48 428z" fill="#4FC3F7"/>
+          <path d="M289 256 48 428a20 20 0 0 0 31 17L339 300 289 256z" fill="#F44336"/>
+          <path d="M289 256 339 212 79 67A20 20 0 0 0 48 84L289 256z" fill="#4CAF50"/>
+          <path d="M339 212l95 55a20 20 0 0 1 0 18l-95 55L289 256l50-44z" fill="#FFC107"/>
         </svg>
-        <div class="btn-store-text">
-          <small data-i18n="google_sub">Татаж авах</small>
-          <strong>Google Play</strong>
-        </div>
+        <div class="bs-t"><small data-i18n="g_sm">Татаж авах</small><strong>Google Play</strong></div>
       </a>
     </div>
-
-    <div class="hero-visual">
-      <div class="phones-row">
-        <div class="phone phone-side phone-left"><div class="phone-screen"></div></div>
-        <div class="phone phone-main">
-          <div class="phone-screen">
-            <img src="appicon.jpg" alt="K-Bridge" class="phone-app-icon" />
-            <div class="phone-app-label">K-Bridge</div>
-          </div>
+    <div class="phones">
+      <div class="ph ph-side ph-l"><div class="ph-screen"></div></div>
+      <div class="ph ph-main">
+        <div class="ph-screen">
+          <img src="appicon.jpg" alt="K-Bridge" class="ph-ic" />
+          <div class="ph-nm">K-Bridge</div>
         </div>
-        <div class="phone phone-side phone-right"><div class="phone-screen"></div></div>
       </div>
+      <div class="ph ph-side ph-r"><div class="ph-screen"></div></div>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
-<div class="stats-bar reveal">
-  <div class="stat-item"><div class="stat-num">2,000+</div><div class="stat-label" data-i18n="stat_members">Гишүүн</div></div>
-  <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label" data-i18n="stat_events">Сарын Эвент</div></div>
-  <div class="stat-item"><div class="stat-num">12+</div><div class="stat-label" data-i18n="stat_clubs">Идэвхтэй Клуб</div></div>
-  <div class="stat-item"><div class="stat-num">🇲🇳🇰🇷</div><div class="stat-label" data-i18n="stat_cultures">Хоёр Соёл</div></div>
+<div class="stats rv">
+  <div class="st"><div class="sn">2,000+</div><div class="sl" data-i18n="s_mem">Гишүүн</div></div>
+  <div class="st"><div class="sn">10+</div><div class="sl" data-i18n="s_ev">Сарын Эвент</div></div>
+  <div class="st"><div class="sn">12+</div><div class="sl" data-i18n="s_cl">Идэвхтэй Клуб</div></div>
+  <div class="st"><div class="sn">🇲🇳🇰🇷</div><div class="sl" data-i18n="s_cu">Хоёр Соёл</div></div>
 </div>
 
 <!-- FEATURES -->
-<section class="features" id="features">
-  <div class="features-top reveal">
-    <div class="tag" data-i18n="feat_tag">Боломжууд</div>
-    <h2 class="s-title" data-i18n="feat_title">Бүх зүйл нэг дор</h2>
-    <p class="s-desc" data-i18n="feat_desc">K-Bridge нь Солонгост байгаа монголчуудад холбоо тогтооход, өсч хөгжихөд шаардлагатай бүх хэрэгслийг нэгтгэдэг.</p>
+<section class="feat sec" id="features">
+  <div class="feat-h rv">
+    <div class="tg" data-i18n="f_tag">Боломжууд</div>
+    <h2 class="h2" data-i18n="f_ttl">Бүх зүйл нэг дор</h2>
+    <p class="p" data-i18n="f_dsc">K-Bridge нь Солонгост байгаа монголчуудад холбоо тогтооход, өсч хөгжихөд шаардлагатай бүх хэрэгслийг нэгтгэдэг.</p>
   </div>
-  <div class="features-grid">
-    <div class="feat-card reveal"><div class="feat-icon">💬</div><h3 data-i18n="f1_title">Групп Чат</h3><p data-i18n="f1_desc">Клуб болон найзуудтайгаа зургийн болон дуут мессежтэй бодит цагийн чатаар холбогдоорой.</p></div>
-    <div class="feat-card reveal"><div class="feat-icon">🎫</div><h3 data-i18n="f2_title">Эвент</h3><p data-i18n="f2_desc">Ойролцоох эвентүүдийг олж нэгд — хэлний солилцооноос соёлын шөнө хүртэл. Апп дотор шууд тасалбар авна.</p></div>
-    <div class="feat-card reveal"><div class="feat-icon">🏆</div><h3 data-i18n="f3_title">Клубууд</h3><p data-i18n="f3_desc">Өөрийн сонирхолд тохирсон клубд элс — спорт, сурах, бизнес, аялал болон бусад.</p></div>
-    <div class="feat-card reveal"><div class="feat-icon">⭐</div><h3 data-i18n="f4_title">Зэрэглэл &amp; Медаль</h3><p data-i18n="f4_desc">Эвентэд оролцох, клубд элсэхэд медаль ол. K-Starter-ээс K-Master хүртэл зэрэглэл ахиул.</p></div>
-    <div class="feat-card reveal"><div class="feat-icon">📸</div><h3 data-i18n="f5_title">Нийгэмлэгийн Мэдээ</h3><p data-i18n="f5_desc">Нийгэмлэгтэйгээ мөч, түүх, шинэчлэлтийг хуваалц. Хүмүүсийн постод дурлаж коммент бич.</p></div>
-    <div class="feat-card reveal"><div class="feat-icon">👤</div><h3 data-i18n="f6_title">Профайл</h3><p data-i18n="f6_desc">Нийгэмлэгийн танилцуулга бий болго — зэрэглэл, медаль, клуб, Солонгос хэлний түвшин.</p></div>
+  <div class="fg">
+    <div class="fc rv"><div class="fi">💬</div><h3 data-i18n="f1t">Групп Чат</h3><p data-i18n="f1d">Клуб болон найзуудтайгаа зургийн болон дуут мессежтэй бодит цагийн чатаар холбогдоорой.</p></div>
+    <div class="fc rv"><div class="fi">🎫</div><h3 data-i18n="f2t">Эвент</h3><p data-i18n="f2d">Ойролцоох эвентүүдийг олж нэгд — хэлний солилцооноос соёлын шөнө хүртэл. Апп дотор шууд тасалбар авна.</p></div>
+    <div class="fc rv"><div class="fi">🏆</div><h3 data-i18n="f3t">Клубууд</h3><p data-i18n="f3d">Өөрийн сонирхолд тохирсон клубд элс — спорт, сурах, бизнес, аялал болон бусад.</p></div>
+    <div class="fc rv"><div class="fi">⭐</div><h3 data-i18n="f4t">Зэрэглэл &amp; Медаль</h3><p data-i18n="f4d">Эвентэд оролцох, клубд элсэхэд медаль ол. K-Starter-ээс K-Master хүртэл зэрэглэл ахиул.</p></div>
+    <div class="fc rv"><div class="fi">📸</div><h3 data-i18n="f5t">Нийгэмлэгийн Мэдээ</h3><p data-i18n="f5d">Нийгэмлэгтэйгээ мөч, түүх, шинэчлэлтийг хуваалц. Дурлаж коммент бич.</p></div>
+    <div class="fc rv"><div class="fi">👤</div><h3 data-i18n="f6t">Профайл</h3><p data-i18n="f6d">Нийгэмлэгийн танилцуулга бий болго — зэрэглэл, медаль, клуб, Солонгос хэлний түвшин.</p></div>
   </div>
 </section>
 
 <!-- HOW -->
-<section class="how" id="how">
-  <div class="how-wrap">
+<section class="how sec" id="how">
+  <div class="how-w">
     <div>
-      <div class="tag reveal" data-i18n="how_tag">Яаж ажилладаг</div>
-      <h2 class="s-title reveal" data-i18n="how_title">3 хялбар алхам</h2>
+      <div class="tg rv" data-i18n="hw_tag">Яаж ажилладаг</div>
+      <h2 class="h2 rv" data-i18n="hw_ttl">3 хялбар алхам</h2>
       <div class="steps">
-        <div class="step reveal"><div class="step-num">1</div><div><h4 data-i18n="s1_title">Профайл үүсгэх</h4><p data-i18n="s1_desc">И-мэйл эсвэл Apple акаунтаараа бүртгүүлэх. Зургаа, Солонгос хэлний түвшин, сонирхлоо нэм.</p></div></div>
-        <div class="step reveal"><div class="step-num">2</div><div><h4 data-i18n="s2_title">Клуб &amp; эвентэд элсэх</h4><p data-i18n="s2_desc">Сонирхлоороо клуб хайж, ойролцоох эвентүүдийг нээ. Нэг товшилтоор элс.</p></div></div>
-        <div class="step reveal"><div class="step-num">3</div><div><h4 data-i18n="s3_title">Холбогдож өсөх</h4><p data-i18n="s3_desc">Гишүүдтэй чатлаж, эвентэд оролцож, медаль олж, шинэ гэртээ жинхэнэ найрамдал бий болго.</p></div></div>
+        <div class="step rv"><div class="snum">1</div><div><h4 data-i18n="s1t">Профайл үүсгэх</h4><p data-i18n="s1d">И-мэйл эсвэл Apple акаунтаараа бүртгүүлэх. Зургаа, Солонгос хэлний түвшин, сонирхлоо нэм.</p></div></div>
+        <div class="step rv"><div class="snum">2</div><div><h4 data-i18n="s2t">Клуб &amp; эвентэд элсэх</h4><p data-i18n="s2d">Сонирхлоороо клуб хайж, ойролцоох эвентүүдийг нээ. Нэг товшилтоор элс.</p></div></div>
+        <div class="step rv"><div class="snum">3</div><div><h4 data-i18n="s3t">Холбогдож өсөх</h4><p data-i18n="s3d">Гишүүдтэй чатлаж, эвентэд оролцож, медаль олж, жинхэнэ найрамдал бий болго.</p></div></div>
       </div>
     </div>
-    <div class="how-visual reveal"><div class="icon-glow-wrap"><img src="appicon.jpg" alt="K-Bridge" class="big-icon" /></div></div>
+    <div class="how-v rv"><div class="gw"><img src="appicon.jpg" alt="K-Bridge" class="big-ic" /></div></div>
   </div>
 </section>
 
 <!-- COMMUNITY -->
-<section class="community" id="community">
-  <div class="community-wrap">
-    <div class="reveal">
-      <div class="tag" data-i18n="comm_tag">Нийгэмлэг</div>
-      <h2 class="s-title" data-i18n="comm_title">Солонгост байгаа<br/>Монголчуудад зориулсан</h2>
-      <p class="s-desc" style="max-width:500px;margin:0 auto;" data-i18n="comm_desc">Хааяа ирсэн байсан ч олон жил амьдарсан байсан ч — K-Bridge нь гэртээ байгаа мэт санагдуулна.</p>
+<section class="comm sec" id="comm">
+  <div class="comm-w">
+    <div class="rv">
+      <div class="tg" data-i18n="cm_tag">Нийгэмлэг</div>
+      <h2 class="h2" data-i18n="cm_ttl">Солонгост байгаа<br/>Монголчуудад зориулсан</h2>
+      <p class="p" style="max-width:460px;margin:0 auto" data-i18n="cm_dsc">Хааяа ирсэн байсан ч олон жил амьдарсан байсан ч — K-Bridge нь гэртээ байгаа мэт санагдуулна.</p>
     </div>
-    <div class="comm-cards">
-      <div class="comm-card reveal"><div class="comm-emoji">🌏</div><h4 data-i18n="c1_title">3 Хэл</h4><p data-i18n="c1_desc">Апп нь Монгол, Солонгос, Англи хэлийг дэмждэг — хэлний түвшнээс үл хамааран холбогдоорой.</p></div>
-      <div class="comm-card reveal"><div class="comm-emoji">🛡️</div><h4 data-i18n="c2_title">Аюулгүй &amp; Итгэлтэй</h4><p data-i18n="c2_desc">Баталгаажсан профайл болон нийгэмлэгийн удирдлага K-Bridge-г хүн бүрт тохиромжтой орчин болгодог.</p></div>
-      <div class="comm-card reveal"><div class="comm-emoji">📍</div><h4 data-i18n="c3_title">Солонгос даяар</h4><p data-i18n="c3_desc">Сеул, Пусан, Инчеон болон Солонгосын бусад хотуудад гишүүд болон эвентүүд байдаг.</p></div>
+    <div class="cc">
+      <div class="ccard rv"><div class="cem">🌏</div><h4 data-i18n="c1t">3 Хэл</h4><p data-i18n="c1d">Апп нь Монгол, Солонгос, Англи хэлийг дэмждэг — хэлний түвшнээс үл хамааран холбогдоорой.</p></div>
+      <div class="ccard rv"><div class="cem">🛡️</div><h4 data-i18n="c2t">Аюулгүй &amp; Итгэлтэй</h4><p data-i18n="c2d">Баталгаажсан профайл болон нийгэмлэгийн удирдлага K-Bridge-г хүн бүрт тохиромжтой орчин болгодог.</p></div>
+      <div class="ccard rv"><div class="cem">📍</div><h4 data-i18n="c3t">Солонгос даяар</h4><p data-i18n="c3d">Сеул, Пусан, Инчеон болон Солонгосын бусад хотуудад гишүүд болон эвентүүд байдаг.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CLUBS -->
-<section class="clubs-section">
-  <div class="clubs-wrap">
-    <div class="reveal" style="text-align:center;margin-bottom:56px;">
-      <div class="tag" data-i18n="clubs_tag">Манай Клубууд</div>
-      <h2 class="s-title" data-i18n="clubs_title">13 клуб &amp; улам нэмэгдэж байна</h2>
-      <p class="s-desc" style="max-width:480px;margin:0 auto;" data-i18n="clubs_desc">Спортоос хөгжим хүртэл, аяллаас ном хүртэл — K-Bridge дотор хүн бүрт клуб байдаг.</p>
-    </div>
-    <div class="clubs-grid reveal">
-      <div class="club-pill">🏀 Basketball</div>
-      <div class="club-pill">🏐 Volleyball</div>
-      <div class="club-pill">💃 Latin Dance</div>
-      <div class="club-pill">🎤 Kpop Dance</div>
-      <div class="club-pill">🎵 Feel · Music &amp; DJ</div>
-      <div class="club-pill">💪 Fitness &amp; Hyrox</div>
-      <div class="club-pill">✈️ Travel</div>
-      <div class="club-pill">🏃 Running</div>
-      <div class="club-pill">📚 Book</div>
-      <div class="club-pill">⛰️ Mountain</div>
-      <div class="club-pill">🏊 Swimming</div>
-      <div class="club-pill">🤿 Freediving</div>
-      <div class="club-pill">🗣️ Speaking</div>
+<!-- CLUBS MARQUEE -->
+<section class="clubs sec">
+  <div class="clubs-h rv">
+    <div class="tg" data-i18n="cl_tag">Манай Клубууд</div>
+    <h2 class="h2" data-i18n="cl_ttl">13 клуб &amp; улам нэмэгдэж байна</h2>
+    <p class="p" data-i18n="cl_dsc">Спортоос хөгжим хүртэл, аяллаас ном хүртэл — хүн бүрт клуб байдаг.</p>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="pill">🏀 Basketball</div>
+      <div class="pill">🏐 Volleyball</div>
+      <div class="pill">💃 Latin Dance</div>
+      <div class="pill">🎤 Kpop Dance</div>
+      <div class="pill">🎵 Feel · Music &amp; DJ</div>
+      <div class="pill">💪 Fitness &amp; Hyrox</div>
+      <div class="pill">✈️ Travel</div>
+      <div class="pill">🏃 Running</div>
+      <div class="pill">📚 Book</div>
+      <div class="pill">⛰️ Mountain</div>
+      <div class="pill">🏊 Swimming</div>
+      <div class="pill">🤿 Freediving</div>
+      <div class="pill">🗣️ Speaking</div>
+      <!-- duplicate for seamless loop -->
+      <div class="pill">🏀 Basketball</div>
+      <div class="pill">🏐 Volleyball</div>
+      <div class="pill">💃 Latin Dance</div>
+      <div class="pill">🎤 Kpop Dance</div>
+      <div class="pill">🎵 Feel · Music &amp; DJ</div>
+      <div class="pill">💪 Fitness &amp; Hyrox</div>
+      <div class="pill">✈️ Travel</div>
+      <div class="pill">🏃 Running</div>
+      <div class="pill">📚 Book</div>
+      <div class="pill">⛰️ Mountain</div>
+      <div class="pill">🏊 Swimming</div>
+      <div class="pill">🤿 Freediving</div>
+      <div class="pill">🗣️ Speaking</div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta">
-  <div class="cta-wrap">
-    <img src="logo.png" alt="K-Bridge" class="cta-logo reveal" />
-    <h2 class="reveal" data-i18n="cta_title">Таны нийгэмлэг<br/>хүлээж байна</h2>
-    <p class="reveal" data-i18n="cta_desc">K-Bridge-г өнөөдөр татаад Солонгосын хамгийн хурдацтай өсч буй Монголчуудын нийгэмлэгийн нэг хэсэг болоорой.</p>
-    <div class="store-buttons reveal">
-      <a href="https://apps.apple.com/app/id000000000" class="btn-store btn-apple" target="_blank">
-        <svg width="22" height="27" viewBox="0 0 814 1000" fill="#000"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-43.4-150.3-109.2C67.3 790 0 663 0 541.8c0-194.3 127.4-297.5 252.7-297.5 66.1 0 121.2 43.4 162.6 43.4 39.5 0 101.1-46 176.3-46 28.5 0 130.9 2.6 198.3 99.2zm-234-181.5c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z"/></svg>
-        <div class="btn-store-text"><small data-i18n="apple_sub">Татаж авах</small><strong>App Store</strong></div>
+<section class="cta sec">
+  <div class="cta-w">
+    <img src="logo.png" alt="K-Bridge" class="cta-logo rv" />
+    <h2 class="h2 rv" data-i18n="ct_ttl">Таны нийгэмлэг<br/>хүлээж байна</h2>
+    <p class="p rv" data-i18n="ct_dsc">K-Bridge-г өнөөдөр татаад Солонгосын хамгийн хурдацтай өсч буй Монголчуудын нийгэмлэгийн нэг хэсэг болоорой.</p>
+    <div class="btns rv">
+      <a href="https://apps.apple.com/app/id000000000" class="bs ba" target="_blank">
+        <svg width="20" height="24" viewBox="0 0 814 1000" fill="#000"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-43.4-150.3-109.2C67.3 790 0 663 0 541.8c0-194.3 127.4-297.5 252.7-297.5 66.1 0 121.2 43.4 162.6 43.4 39.5 0 101.1-46 176.3-46 28.5 0 130.9 2.6 198.3 99.2zm-234-181.5c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z"/></svg>
+        <div class="bs-t"><small data-i18n="a_sm">Татаж авах</small><strong>App Store</strong></div>
       </a>
-      <a href="#" class="btn-store btn-google">
-        <svg width="22" height="24" viewBox="0 0 512 512" fill="none">
-          <path d="M48 428.3V83.7a20 20 0 0 1 30.6-16.9L434 251.1a20 20 0 0 1 0 9.8L78.6 445.2A20 20 0 0 1 48 428.3z" fill="#4FC3F7"/>
-          <path d="M288.5 256 48 428.3A20 20 0 0 0 78.6 445L339 299.5 288.5 256z" fill="#F44336"/>
-          <path d="M288.5 256 339 212.5 78.6 67A20 20 0 0 0 48 83.7L288.5 256z" fill="#4CAF50"/>
-          <path d="M339 212.5l95 54.9a20 20 0 0 1 0 17.2l-95 55.4L288.5 256l50.5-43.5z" fill="#FFC107"/>
+      <a href="#" class="bs bg">
+        <svg width="20" height="22" viewBox="0 0 512 512" fill="none">
+          <path d="M48 428V84a20 20 0 0 1 31-17L434 251a20 20 0 0 1 0 10L79 445A20 20 0 0 1 48 428z" fill="#4FC3F7"/>
+          <path d="M289 256 48 428a20 20 0 0 0 31 17L339 300 289 256z" fill="#F44336"/>
+          <path d="M289 256 339 212 79 67A20 20 0 0 0 48 84L289 256z" fill="#4CAF50"/>
+          <path d="M339 212l95 55a20 20 0 0 1 0 18l-95 55L289 256l50-44z" fill="#FFC107"/>
         </svg>
-        <div class="btn-store-text"><small data-i18n="google_sub">Татаж авах</small><strong>Google Play</strong></div>
+        <div class="bs-t"><small data-i18n="g_sm">Татаж авах</small><strong>Google Play</strong></div>
       </a>
     </div>
   </div>
@@ -569,144 +629,116 @@
 
 <!-- FOOTER -->
 <footer>
-  <img src="logo.png" alt="K-Bridge" class="f-logo" />
-  <div class="f-links">
-    <a href="privacy.html" data-i18n="footer_privacy">Нууцлалын бодлого</a>
-    <a href="mailto:km.bridge.26@gmail.com" data-i18n="footer_contact">Холбоо барих</a>
+  <img src="logo.png" alt="K-Bridge" />
+  <div class="fl">
+    <a href="privacy.html" data-i18n="fp">Нууцлалын бодлого</a>
+    <a href="mailto:km.bridge.26@gmail.com" data-i18n="fc">Холбоо барих</a>
     <a href="https://instagram.com/the_kbridge" target="_blank">Instagram</a>
   </div>
-  <p class="f-copy">&copy; 2026 K-Bridge.</p>
+  <p class="fc2">&copy; 2026 K-Bridge.</p>
 </footer>
 
 <script>
 const T = {
-  mn: {
-    nav_features: 'Боломжууд', nav_how: 'Яаж ажилладаг', nav_community: 'Нийгэмлэг',
-    nav_privacy: 'Нууцлал', nav_download: 'Апп татах',
-    hero_badge: 'Солонгост Монголчуудын Апп',
-    hero_line1: 'Монголчуудын', hero_line2: 'Нийгэмлэг', hero_line3: 'Солонгост',
-    hero_sub: 'K-Bridge нь Солонгост амьдарч буй монголчуудыг холбодог — эвент хайж, клубд элсэж, нийгэмлэгтэйгээ чатлаж, удаан үргэлжлэх найрамдал бий болго.',
-    apple_sub: 'Татаж авах', google_sub: 'Татаж авах',
-    stat_members: 'Гишүүн', stat_events: 'Сарын Эвент', stat_clubs: 'Идэвхтэй Клуб', stat_cultures: 'Хоёр Соёл',
-    feat_tag: 'Боломжууд', feat_title: 'Бүх зүйл нэг дор',
-    feat_desc: 'K-Bridge нь Солонгост байгаа монголчуудад холбоо тогтооход, өсч хөгжихөд шаардлагатай бүх хэрэгслийг нэгтгэдэг.',
-    f1_title: 'Групп Чат', f1_desc: 'Клуб болон найзуудтайгаа зургийн болон дуут мессежтэй бодит цагийн чатаар холбогдоорой.',
-    f2_title: 'Эвент', f2_desc: 'Ойролцоох эвентүүдийг олж нэгд — хэлний солилцооноос соёлын шөнө хүртэл. Апп дотор шууд тасалбар авна.',
-    f3_title: 'Клубууд', f3_desc: 'Өөрийн сонирхолд тохирсон клубд элс — спорт, сурах, бизнес, аялал болон бусад.',
-    f4_title: 'Зэрэглэл & Медаль', f4_desc: 'Эвентэд оролцох, клубд элсэхэд медаль ол. K-Starter-ээс K-Master хүртэл зэрэглэл ахиул.',
-    f5_title: 'Нийгэмлэгийн Мэдээ', f5_desc: 'Нийгэмлэгтэйгээ мөч, түүх, шинэчлэлтийг хуваалц. Хүмүүсийн постод дурлаж коммент бич.',
-    f6_title: 'Профайл', f6_desc: 'Нийгэмлэгийн танилцуулга бий болго — зэрэглэл, медаль, клуб, Солонгос хэлний түвшин.',
-    how_tag: 'Яаж ажилладаг', how_title: '3 хялбар алхам',
-    s1_title: 'Профайл үүсгэх', s1_desc: 'И-мэйл эсвэл Apple акаунтаараа бүртгүүлэх. Зургаа, Солонгос хэлний түвшин, сонирхлоо нэм.',
-    s2_title: 'Клуб & эвентэд элсэх', s2_desc: 'Сонирхлоороо клуб хайж, ойролцоох эвентүүдийг нээ. Нэг товшилтоор элс.',
-    s3_title: 'Холбогдож өсөх', s3_desc: 'Гишүүдтэй чатлаж, эвентэд оролцож, медаль олж, шинэ гэртээ жинхэнэ найрамдал бий болго.',
-    comm_tag: 'Нийгэмлэг', comm_title: 'Солонгост байгаа<br/>Монголчуудад зориулсан',
-    comm_desc: 'Хааяа ирсэн байсан ч олон жил амьдарсан байсан ч — K-Bridge нь гэртээ байгаа мэт санагдуулна.',
-    c1_title: '3 Хэл', c1_desc: 'Апп нь Монгол, Солонгос, Англи хэлийг дэмждэг — хэлний түвшнээс үл хамааран холбогдоорой.',
-    c2_title: 'Аюулгүй & Итгэлтэй', c2_desc: 'Баталгаажсан профайл болон нийгэмлэгийн удирдлага K-Bridge-г хүн бүрт тохиромжтой орчин болгодог.',
-    c3_title: 'Солонгос даяар', c3_desc: 'Сеул, Пусан, Инчеон болон Солонгосын бусад хотуудад гишүүд болон эвентүүд байдаг.',
-    clubs_tag: 'Манай Клубууд', clubs_title: '13 клуб & улам нэмэгдэж байна',
-    clubs_desc: 'Спортоос хөгжим хүртэл, аяллаас ном хүртэл — K-Bridge дотор хүн бүрт клуб байдаг.',
-    cta_title: 'Таны нийгэмлэг<br/>хүлээж байна',
-    cta_desc: 'K-Bridge-г өнөөдөр татаад Солонгосын хамгийн хурдацтай өсч буй Монголчуудын нийгэмлэгийн нэг хэсэг болоорой.',
-    footer_privacy: 'Нууцлалын бодлого', footer_contact: 'Холбоо барих',
+  mn:{
+    n_feat:'Боломжууд',n_how:'Яаж ажилладаг',n_comm:'Нийгэмлэг',n_priv:'Нууцлал',n_dl:'Апп татах',
+    h_badge:'Солонгост Монголчуудын Апп',
+    h1:'Монголчуудын',h2:'Нийгэмлэг',h3:'Солонгост',
+    h_sub:'K-Bridge нь Солонгост амьдарч буй монголчуудыг холбодог — эвент хайж, клубд элсэж, нийгэмлэгтэйгээ чатлаж, жинхэнэ найрамдал бий болго.',
+    a_sm:'Татаж авах',g_sm:'Татаж авах',
+    s_mem:'Гишүүн',s_ev:'Сарын Эвент',s_cl:'Идэвхтэй Клуб',s_cu:'Хоёр Соёл',
+    f_tag:'Боломжууд',f_ttl:'Бүх зүйл нэг дор',f_dsc:'K-Bridge нь Солонгост байгаа монголчуудад холбоо тогтооход, өсч хөгжихөд шаардлагатай бүх хэрэгслийг нэгтгэдэг.',
+    f1t:'Групп Чат',f1d:'Клуб болон найзуудтайгаа зургийн болон дуут мессежтэй бодит цагийн чатаар холбогдоорой.',
+    f2t:'Эвент',f2d:'Ойролцоох эвентүүдийг олж нэгд — хэлний солилцооноос соёлын шөнө хүртэл. Апп дотор шууд тасалбар авна.',
+    f3t:'Клубууд',f3d:'Өөрийн сонирхолд тохирсон клубд элс — спорт, сурах, бизнес, аялал болон бусад.',
+    f4t:'Зэрэглэл & Медаль',f4d:'Эвентэд оролцох, клубд элсэхэд медаль ол. K-Starter-ээс K-Master хүртэл зэрэглэл ахиул.',
+    f5t:'Нийгэмлэгийн Мэдээ',f5d:'Нийгэмлэгтэйгээ мөч, түүх, шинэчлэлтийг хуваалц. Дурлаж коммент бич.',
+    f6t:'Профайл',f6d:'Нийгэмлэгийн танилцуулга бий болго — зэрэглэл, медаль, клуб, Солонгос хэлний түвшин.',
+    hw_tag:'Яаж ажилладаг',hw_ttl:'3 хялбар алхам',
+    s1t:'Профайл үүсгэх',s1d:'И-мэйл эсвэл Apple акаунтаараа бүртгүүлэх. Зургаа, Солонгос хэлний түвшин, сонирхлоо нэм.',
+    s2t:'Клуб & эвентэд элсэх',s2d:'Сонирхлоороо клуб хайж, ойролцоох эвентүүдийг нээ. Нэг товшилтоор элс.',
+    s3t:'Холбогдож өсөх',s3d:'Гишүүдтэй чатлаж, эвентэд оролцож, медаль олж, жинхэнэ найрамдал бий болго.',
+    cm_tag:'Нийгэмлэг',cm_ttl:'Солонгост байгаа<br/>Монголчуудад зориулсан',cm_dsc:'Хааяа ирсэн байсан ч олон жил амьдарсан байсан ч — K-Bridge нь гэртээ байгаа мэт санагдуулна.',
+    c1t:'3 Хэл',c1d:'Апп нь Монгол, Солонгос, Англи хэлийг дэмждэг — хэлний түвшнээс үл хамааран холбогдоорой.',
+    c2t:'Аюулгүй & Итгэлтэй',c2d:'Баталгаажсан профайл болон нийгэмлэгийн удирдлага K-Bridge-г хүн бүрт тохиромжтой орчин болгодог.',
+    c3t:'Солонгос даяар',c3d:'Сеул, Пусан, Инчеон болон Солонгосын бусад хотуудад гишүүд болон эвентүүд байдаг.',
+    cl_tag:'Манай Клубууд',cl_ttl:'13 клуб & улам нэмэгдэж байна',cl_dsc:'Спортоос хөгжим хүртэл, аяллаас ном хүртэл — хүн бүрт клуб байдаг.',
+    ct_ttl:'Таны нийгэмлэг<br/>хүлээж байна',ct_dsc:'K-Bridge-г өнөөдөр татаад Солонгосын хамгийн хурдацтай өсч буй Монголчуудын нийгэмлэгийн нэг хэсэг болоорой.',
+    fp:'Нууцлалын бодлого',fc:'Холбоо барих',
   },
-  ko: {
-    nav_features: '기능', nav_how: '이용 방법', nav_community: '커뮤니티',
-    nav_privacy: '개인정보', nav_download: '앱 다운로드',
-    hero_badge: '한국 몽골인 커뮤니티 앱',
-    hero_line1: '한국의', hero_line2: '몽골인', hero_line3: '커뮤니티',
-    hero_sub: 'K-Bridge는 한국에 사는 몽골인들을 연결합니다 — 이벤트를 찾고, 클럽에 가입하고, 커뮤니티와 채팅하며 오래가는 우정을 쌓으세요.',
-    apple_sub: '다운로드', google_sub: '다운로드',
-    stat_members: '회원', stat_events: '월간 이벤트', stat_clubs: '활성 클럽', stat_cultures: '두 문화',
-    feat_tag: '기능', feat_title: '모든 것을 한 곳에',
-    feat_desc: 'K-Bridge는 한국의 몽골인들이 연결하고 성장하는 데 필요한 모든 도구를 제공합니다.',
-    f1_title: '그룹 채팅', f1_desc: '클럽 및 친구 그룹과 사진, 음성 메시지를 포함한 실시간 그룹 채팅으로 연결하세요.',
-    f2_title: '이벤트', f2_desc: '주변 이벤트를 찾아 참여하세요 — 언어 교환부터 문화의 밤까지. 앱에서 직접 티켓을 예매하세요.',
-    f3_title: '클럽', f3_desc: '관심사에 맞는 클럽에 가입하세요 — 스포츠, 스터디, 비즈니스, 여행 등 다양한 클럽이 있습니다.',
-    f4_title: '티어 & 배지', f4_desc: '이벤트 참여와 클럽 가입으로 배지를 획득하세요. K-Starter에서 K-Master까지 티어를 올리세요.',
-    f5_title: '커뮤니티 피드', f5_desc: '커뮤니티와 순간, 이야기, 업데이트를 공유하세요. 주변 사람들의 게시물에 좋아요와 댓글을 남기세요.',
-    f6_title: '프로필', f6_desc: '커뮤니티 정체성을 구축하세요 — 티어, 배지, 클럽, 한국어 수준을 하나의 프로필에 담았습니다.',
-    how_tag: '이용 방법', how_title: '3가지 간단한 단계',
-    s1_title: '프로필 만들기', s1_desc: '이메일 또는 Apple 계정으로 가입하세요. 사진, 한국어 수준, 관심사를 추가하여 커뮤니티를 찾으세요.',
-    s2_title: '클럽 & 이벤트 참여', s2_desc: '관심사별 클럽을 탐색하고 주변 이벤트를 찾으세요. 한 번의 탭으로 가입하세요.',
-    s3_title: '연결하고 성장하기', s3_desc: '회원들과 채팅하고, 이벤트에 참석하고, 배지를 획득하고, 새로운 고향에서 진정한 우정을 쌓으세요.',
-    comm_tag: '커뮤니티', comm_title: '한국에 사는<br/>몽골인들을 위해 만들어진',
-    comm_desc: '방금 도착했든 수년째 살고 있든 — K-Bridge는 타향에서도 집처럼 편안한 공간입니다.',
-    c1_title: '3개 언어', c1_desc: '앱은 몽골어, 한국어, 영어를 지원합니다 — 언어 수준에 상관없이 연결하세요.',
-    c2_title: '안전하고 신뢰할 수 있는', c2_desc: '인증된 프로필과 커뮤니티 모더레이션이 K-Bridge를 모두에게 안전하고 환영받는 공간으로 만듭니다.',
-    c3_title: '한국 전역에', c3_desc: '서울, 부산, 인천 등 한국 전역의 도시에 회원과 이벤트가 있습니다.',
-    clubs_tag: '우리 클럽', clubs_title: '13개 클럽 & 계속 성장 중',
-    clubs_desc: '스포츠부터 음악까지, 여행부터 독서까지 — K-Bridge에는 모두를 위한 클럽이 있습니다.',
-    cta_title: '당신의 커뮤니티가<br/>기다리고 있습니다',
-    cta_desc: '지금 K-Bridge를 다운로드하고 한국에서 가장 빠르게 성장하는 몽골인 커뮤니티의 일원이 되세요.',
-    footer_privacy: '개인정보처리방침', footer_contact: '연락처',
+  ko:{
+    n_feat:'기능',n_how:'이용 방법',n_comm:'커뮤니티',n_priv:'개인정보',n_dl:'앱 다운로드',
+    h_badge:'한국 몽골인 커뮤니티 앱',
+    h1:'한국의',h2:'몽골인',h3:'커뮤니티',
+    h_sub:'K-Bridge는 한국에 사는 몽골인들을 연결합니다 — 이벤트를 찾고, 클럽에 가입하고, 커뮤니티와 채팅하며 오래가는 우정을 쌓으세요.',
+    a_sm:'다운로드',g_sm:'다운로드',
+    s_mem:'회원',s_ev:'월간 이벤트',s_cl:'활성 클럽',s_cu:'두 문화',
+    f_tag:'기능',f_ttl:'모든 것을 한 곳에',f_dsc:'K-Bridge는 한국의 몽골인들이 연결하고 성장하는 데 필요한 모든 도구를 제공합니다.',
+    f1t:'그룹 채팅',f1d:'클럽 및 친구 그룹과 사진, 음성 메시지를 포함한 실시간 그룹 채팅으로 연결하세요.',
+    f2t:'이벤트',f2d:'주변 이벤트를 찾아 참여하세요 — 언어 교환부터 문화의 밤까지. 앱에서 직접 티켓을 예매하세요.',
+    f3t:'클럽',f3d:'관심사에 맞는 클럽에 가입하세요 — 스포츠, 스터디, 비즈니스, 여행 등 다양한 클럽이 있습니다.',
+    f4t:'티어 & 배지',f4d:'이벤트 참여와 클럽 가입으로 배지를 획득하세요. K-Starter에서 K-Master까지 티어를 올리세요.',
+    f5t:'커뮤니티 피드',f5d:'커뮤니티와 순간, 이야기, 업데이트를 공유하세요. 주변 사람들의 게시물에 좋아요와 댓글을 남기세요.',
+    f6t:'프로필',f6d:'커뮤니티 정체성을 구축하세요 — 티어, 배지, 클럽, 한국어 수준을 하나의 프로필에 담았습니다.',
+    hw_tag:'이용 방법',hw_ttl:'3가지 간단한 단계',
+    s1t:'프로필 만들기',s1d:'이메일 또는 Apple 계정으로 가입하세요. 사진, 한국어 수준, 관심사를 추가하여 커뮤니티를 찾으세요.',
+    s2t:'클럽 & 이벤트 참여',s2d:'관심사별 클럽을 탐색하고 주변 이벤트를 찾으세요. 한 번의 탭으로 가입하세요.',
+    s3t:'연결하고 성장하기',s3d:'회원들과 채팅하고, 이벤트에 참석하고, 배지를 획득하고, 새로운 고향에서 진정한 우정을 쌓으세요.',
+    cm_tag:'커뮤니티',cm_ttl:'한국에 사는<br/>몽골인들을 위해 만들어진',cm_dsc:'방금 도착했든 수년째 살고 있든 — K-Bridge는 타향에서도 집처럼 편안한 공간입니다.',
+    c1t:'3개 언어',c1d:'앱은 몽골어, 한국어, 영어를 지원합니다 — 언어 수준에 상관없이 연결하세요.',
+    c2t:'안전하고 신뢰할 수 있는',c2d:'인증된 프로필과 커뮤니티 모더레이션이 K-Bridge를 모두에게 안전하고 환영받는 공간으로 만듭니다.',
+    c3t:'한국 전역에',c3d:'서울, 부산, 인천 등 한국 전역의 도시에 회원과 이벤트가 있습니다.',
+    cl_tag:'우리 클럽',cl_ttl:'13개 클럽 & 계속 성장 중',cl_dsc:'스포츠부터 음악까지, 여행부터 독서까지 — 모두를 위한 클럽이 있습니다.',
+    ct_ttl:'당신의 커뮤니티가<br/>기다리고 있습니다',ct_dsc:'지금 K-Bridge를 다운로드하고 한국에서 가장 빠르게 성장하는 몽골인 커뮤니티의 일원이 되세요.',
+    fp:'개인정보처리방침',fc:'연락처',
   },
-  en: {
-    nav_features: 'Features', nav_how: 'How it works', nav_community: 'Community',
-    nav_privacy: 'Privacy', nav_download: 'Download App',
-    hero_badge: 'The App for Mongolians in Korea',
-    hero_line1: 'Mongolians', hero_line2: 'Community', hero_line3: 'in Korea',
-    hero_sub: 'K-Bridge connects Mongolians living in Korea — find events, join clubs, chat with your community, and build friendships that last.',
-    apple_sub: 'Download on the', google_sub: 'Get it on',
-    stat_members: 'Members', stat_events: 'Monthly Events', stat_clubs: 'Active Clubs', stat_cultures: 'Two Cultures',
-    feat_tag: 'Features', feat_title: 'Everything you need in one place',
-    feat_desc: 'K-Bridge brings together all the tools Mongolians in Korea need to connect, grow, and thrive.',
-    f1_title: 'Group Chat', f1_desc: 'Stay connected with your clubs and friend groups through real-time messaging with photo and voice support.',
-    f2_title: 'Events', f2_desc: 'Discover and join events near you — from language exchanges to cultural nights. Book tickets directly in the app.',
-    f3_title: 'Clubs', f3_desc: 'Join clubs based on your interests — sports, study, business, travel, and more. Find your people.',
-    f4_title: 'Tiers & Badges', f4_desc: 'Earn badges as you attend events and join clubs. Rise through tiers from K-Starter all the way to K-Master.',
-    f5_title: 'Community Feed', f5_desc: 'Share moments, stories, and updates with the community. Like and comment on posts from people around you.',
-    f6_title: 'Profiles', f6_desc: 'Build your community identity — your tier, badges, clubs, and Korean language level all in one profile.',
-    how_tag: 'How it works', how_title: 'Join in 3 simple steps',
-    s1_title: 'Create your profile', s1_desc: 'Sign up with your email or Apple account. Add your photo, Korean level, and interests to find your community.',
-    s2_title: 'Join clubs & events', s2_desc: 'Browse clubs by interest and discover events happening near you. One tap to join — no paperwork needed.',
-    s3_title: 'Connect & grow', s3_desc: 'Chat with members, attend events, earn badges, and build genuine friendships in your new home.',
-    comm_tag: 'Community', comm_title: 'Built for Mongolians<br/>living in Korea',
-    comm_desc: 'Whether you just arrived or have been here for years — K-Bridge is your home away from home.',
-    c1_title: '3 Languages', c1_desc: 'The app supports Mongolian, Korean, and English — so you can connect no matter your language level.',
-    c2_title: 'Safe & Trusted', c2_desc: 'Verified profiles and community moderation keep K-Bridge a safe and welcoming space for everyone.',
-    c3_title: 'All Across Korea', c3_desc: 'Members and events in Seoul, Busan, Incheon, and cities across Korea. Wherever you are, we are too.',
-    clubs_tag: 'Our Clubs', clubs_title: '13 clubs & counting',
-    clubs_desc: 'From sports to music, travel to books — there\'s a club for everyone in K-Bridge.',
-    cta_title: 'Your community<br/>is waiting',
-    cta_desc: 'Download K-Bridge today and become part of the fastest growing Mongolian community in Korea.',
-    footer_privacy: 'Privacy Policy', footer_contact: 'Contact',
+  en:{
+    n_feat:'Features',n_how:'How it works',n_comm:'Community',n_priv:'Privacy',n_dl:'Download App',
+    h_badge:'The App for Mongolians in Korea',
+    h1:'Mongolians',h2:'Community',h3:'in Korea',
+    h_sub:'K-Bridge connects Mongolians living in Korea — find events, join clubs, chat with your community, and build friendships that last.',
+    a_sm:'Download on the',g_sm:'Get it on',
+    s_mem:'Members',s_ev:'Monthly Events',s_cl:'Active Clubs',s_cu:'Two Cultures',
+    f_tag:'Features',f_ttl:'Everything you need in one place',f_dsc:'K-Bridge brings together all the tools Mongolians in Korea need to connect, grow, and thrive.',
+    f1t:'Group Chat',f1d:'Stay connected with your clubs and friend groups through real-time messaging with photo and voice support.',
+    f2t:'Events',f2d:'Discover and join events near you — from language exchanges to cultural nights. Book tickets directly in the app.',
+    f3t:'Clubs',f3d:'Join clubs based on your interests — sports, study, business, travel, and more. Find your people.',
+    f4t:'Tiers & Badges',f4d:'Earn badges as you attend events and join clubs. Rise through tiers from K-Starter all the way to K-Master.',
+    f5t:'Community Feed',f5d:'Share moments, stories, and updates with the community. Like and comment on posts from people around you.',
+    f6t:'Profiles',f6d:'Build your community identity — your tier, badges, clubs, and Korean language level all in one profile.',
+    hw_tag:'How it works',hw_ttl:'Join in 3 simple steps',
+    s1t:'Create your profile',s1d:'Sign up with your email or Apple account. Add your photo, Korean level, and interests to find your community.',
+    s2t:'Join clubs & events',s2d:'Browse clubs by interest and discover events happening near you. One tap to join — no paperwork needed.',
+    s3t:'Connect & grow',s3d:'Chat with members, attend events, earn badges, and build genuine friendships in your new home.',
+    cm_tag:'Community',cm_ttl:'Built for Mongolians<br/>living in Korea',cm_dsc:'Whether you just arrived or have been here for years — K-Bridge is your home away from home.',
+    c1t:'3 Languages',c1d:'The app supports Mongolian, Korean, and English — so you can connect no matter your language level.',
+    c2t:'Safe & Trusted',c2d:'Verified profiles and community moderation keep K-Bridge a safe and welcoming space for everyone.',
+    c3t:'All Across Korea',c3d:'Members and events in Seoul, Busan, Incheon, and cities across Korea. Wherever you are, we are too.',
+    cl_tag:'Our Clubs',cl_ttl:'13 clubs & counting',cl_dsc:'From sports to music, travel to books — there\'s a club for everyone.',
+    ct_ttl:'Your community<br/>is waiting',ct_dsc:'Download K-Bridge today and become part of the fastest growing Mongolian community in Korea.',
+    fp:'Privacy Policy',fc:'Contact',
   }
 };
 
-let currentLang = 'mn';
-
-function setLang(lang) {
-  currentLang = lang;
+function L(lang) {
   document.documentElement.lang = lang;
-
-  // Update active button
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
-  });
-
-  // Update all translated elements
+  document.querySelectorAll('.lb').forEach(b => b.classList.toggle('on', b.textContent.toLowerCase() === lang));
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (T[lang][key] !== undefined) {
-      el.innerHTML = T[lang][key];
-    }
+    const k = el.getAttribute('data-i18n');
+    if (T[lang][k] !== undefined) el.innerHTML = T[lang][k];
   });
 }
 
 // Scroll reveal
-const els = document.querySelectorAll('.reveal');
 const obs = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('in'), i * 55);
+      setTimeout(() => e.target.classList.add('in'), i * 50);
       obs.unobserve(e.target);
     }
   });
-}, { threshold: 0.1 });
-els.forEach(el => obs.observe(el));
+}, { threshold: 0.08 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 </script>
-
 </body>
 </html>
