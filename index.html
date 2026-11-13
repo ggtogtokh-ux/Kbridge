@@ -42,7 +42,12 @@
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
     }
-    .n-logo img { height: 42px; display: block; object-fit: contain; }
+    .n-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .n-logo-ic { width: 36px; height: 36px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+    .n-logo-name {
+      font-size: 20px; font-weight: 900; letter-spacing: -.04em; color: #fff;
+    }
+    .n-logo-name span { color: var(--o); }
     .n-center {
       display: flex; align-items: center; gap: 28px;
       position: absolute; left: 50%; transform: translateX(-50%);
@@ -469,7 +474,8 @@
     /* Mobile */
     @media (max-width: 540px) {
       nav { padding: 0 16px; height: 60px; }
-      .n-logo img { height: 32px; }
+      .n-logo-ic { width: 30px; height: 30px; border-radius: 8px; }
+      .n-logo-name { font-size: 17px; }
       .lb { font-size: 10px; padding: 3px 8px; }
 
       .hero { padding: 76px 16px 48px; }
@@ -501,7 +507,10 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="n-logo"><img src="logo.png" alt="K-Bridge" /></a>
+  <a href="#" class="n-logo">
+    <img src="appicon.jpg" alt="K-Bridge" class="n-logo-ic" />
+    <span class="n-logo-name">K<span>-</span>Bridge</span>
+  </a>
   <div class="n-center">
     <a href="#features" data-i18n="n_feat">Боломжууд</a>
     <a href="#how"      data-i18n="n_how">Яаж ажилладаг</a>
@@ -658,7 +667,10 @@
 <!-- CTA -->
 <section class="cta sec">
   <div class="cta-w">
-    <img src="logo.png" alt="K-Bridge" class="cta-logo rv" />
+    <div class="rv" style="display:inline-flex;align-items:center;gap:10px;margin-bottom:36px;">
+      <img src="appicon.jpg" style="width:48px;height:48px;border-radius:14px;object-fit:cover;" />
+      <span style="font-size:28px;font-weight:900;letter-spacing:-.04em;">K<span style="color:var(--o)">-</span>Bridge</span>
+    </div>
     <h2 class="h2 rv" data-i18n="ct_ttl">Таны нийгэмлэг<br/>хүлээж байна</h2>
     <p class="p rv" data-i18n="ct_dsc">K-Bridge-г өнөөдөр татаад Солонгосын хамгийн хурдацтай өсч буй Монголчуудын нийгэмлэгийн нэг хэсэг болоорой.</p>
     <div class="btns rv">
@@ -681,7 +693,10 @@
 
 <!-- FOOTER -->
 <footer>
-  <img src="logo.png" alt="K-Bridge" />
+  <div style="display:flex;align-items:center;gap:8px;">
+    <img src="appicon.jpg" style="width:28px;height:28px;border-radius:7px;object-fit:cover;" />
+    <span style="font-size:16px;font-weight:900;letter-spacing:-.03em;">K<span style="color:var(--o)">-</span>Bridge</span>
+  </div>
   <div class="fl">
     <a href="privacy.html" data-i18n="fp">Нууцлалын бодлого</a>
     <a href="mailto:km.bridge.26@gmail.com" data-i18n="fc">Холбоо барих</a>
