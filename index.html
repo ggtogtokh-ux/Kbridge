@@ -565,6 +565,50 @@
     .comm-card h4 { font-size: 17px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.02em; }
     .comm-card p { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
 
+    /* ── CLUBS ── */
+    .clubs-section {
+      padding: 110px 48px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .clubs-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .clubs-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .club-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      transition: border-color 0.22s, background 0.22s, transform 0.22s;
+      cursor: default;
+    }
+    .club-pill:hover {
+      border-color: rgba(232,97,58,0.5);
+      background: rgba(232,97,58,0.08);
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 960px) {
+      .clubs-section { padding: 72px 24px; }
+    }
+
     /* ── CTA ── */
     .cta {
       padding: 130px 48px;
@@ -756,15 +800,15 @@
 <!-- STATS -->
 <div class="stats-bar reveal">
   <div class="stat-item">
-    <div class="stat-num">1,000+</div>
+    <div class="stat-num">2,000+</div>
     <div class="stat-label">Members</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">50+</div>
+    <div class="stat-num">10+</div>
     <div class="stat-label">Monthly Events</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">30+</div>
+    <div class="stat-num">12+</div>
     <div class="stat-label">Active Clubs</div>
   </div>
   <div class="stat-item">
@@ -879,6 +923,32 @@
         <h4>All Across Korea</h4>
         <p>Members and events in Seoul, Busan, Incheon, and cities across Korea. Wherever you are, we are too.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLUBS -->
+<section class="clubs-section">
+  <div class="clubs-wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:56px;">
+      <div class="tag">Our Clubs</div>
+      <h2 class="s-title">13 clubs & counting</h2>
+      <p class="s-desc" style="max-width:480px;margin:0 auto;">From sports to music, travel to books — there's a club for everyone in K-Bridge.</p>
+    </div>
+    <div class="clubs-grid reveal">
+      <div class="club-pill">🏀 Basketball</div>
+      <div class="club-pill">🏐 Volleyball</div>
+      <div class="club-pill">💃 Latin Dance</div>
+      <div class="club-pill">🎤 Kpop Dance</div>
+      <div class="club-pill">🎵 Feel · Music &amp; DJ</div>
+      <div class="club-pill">💪 Fitness &amp; Hyrox</div>
+      <div class="club-pill">✈️ Travel</div>
+      <div class="club-pill">🏃 Running</div>
+      <div class="club-pill">📚 Book</div>
+      <div class="club-pill">⛰️ Mountain</div>
+      <div class="club-pill">🏊 Swimming</div>
+      <div class="club-pill">🤿 Freediving</div>
+      <div class="club-pill">🗣️ Speaking</div>
     </div>
   </div>
 </section>
