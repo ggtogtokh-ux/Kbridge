@@ -420,6 +420,86 @@
       box-shadow: 0 8px 24px rgba(232,97,58,.15);
     }
 
+    /* ═══════════════ INSTAGRAM ═══════════════ */
+    .ig-sec {
+      padding: clamp(60px,10vw,100px) clamp(16px,5vw,48px);
+      border-top: 1px solid var(--b);
+      text-align: center;
+    }
+    .ig-sec .tg { margin-bottom: 12px; }
+
+    .ig-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border: 1px solid rgba(131,58,180,.35);
+      border-radius: 24px;
+      padding: clamp(24px,5vw,36px) clamp(28px,6vw,52px);
+      margin-top: 36px;
+      text-decoration: none;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      max-width: 560px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .ig-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg,
+        rgba(131,58,180,.12) 0%,
+        rgba(193,53,132,.08) 50%,
+        rgba(253,29,29,.06) 100%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .ig-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(131,58,180,.25); border-color: rgba(193,53,132,.5); }
+    .ig-card:hover::before { opacity: 1; }
+
+    .ig-icon {
+      width: clamp(52px,10vw,68px);
+      height: clamp(52px,10vw,68px);
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+      box-shadow: 0 8px 24px rgba(220,39,67,.35);
+    }
+    .ig-icon svg { width: clamp(26px,5vw,34px); height: clamp(26px,5vw,34px); }
+
+    .ig-text { text-align: left; position: relative; z-index: 1; }
+    .ig-handle {
+      font-size: clamp(18px,4vw,26px);
+      font-weight: 900; letter-spacing: -.03em;
+      color: #fff; display: block; margin-bottom: 4px;
+    }
+    .ig-sub {
+      font-size: clamp(12px,2vw,14px);
+      color: rgba(255,255,255,.5);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .ig-sub::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #69e44c;
+      flex-shrink: 0;
+    }
+
+    .ig-arrow {
+      margin-left: auto; color: rgba(255,255,255,.3);
+      font-size: 22px; position: relative; z-index: 1;
+      transition: transform .25s, color .25s;
+    }
+    .ig-card:hover .ig-arrow { transform: translateX(4px); color: rgba(255,255,255,.7); }
+
+    @media (max-width: 540px) {
+      .ig-sec { padding: 48px 16px; }
+      .ig-card { gap: 16px; padding: 20px 24px; border-radius: 18px; }
+      .ig-arrow { display: none; }
+    }
+
     /* ═══════════════ CTA ═══════════════ */
     .cta {
       padding: clamp(80px,14vw,130px) clamp(16px,5vw,48px);
@@ -664,6 +744,26 @@
   </div>
 </section>
 
+<!-- INSTAGRAM -->
+<section class="ig-sec sec">
+  <div class="tg rv" data-i18n="ig_tag">Биднийг дагаарай</div>
+  <h2 class="h2 rv" data-i18n="ig_ttl">Instagram дээр холбогдоорой</h2>
+  <a href="https://instagram.com/the_kbridge" target="_blank" class="ig-card rv">
+    <div class="ig-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/>
+      </svg>
+    </div>
+    <div class="ig-text">
+      <span class="ig-handle">@the_kbridge</span>
+      <span class="ig-sub" data-i18n="ig_sub">Эвент, клуб, нийгэмлэгийн мэдээ</span>
+    </div>
+    <span class="ig-arrow">→</span>
+  </a>
+</section>
+
 <!-- CTA -->
 <section class="cta sec">
   <div class="cta-w">
@@ -731,6 +831,7 @@ const T = {
     c3t:'Солонгос даяар',c3d:'Сеул, Пусан, Инчеон болон Солонгосын бусад хотуудад гишүүд болон эвентүүд байдаг.',
     cl_tag:'Манай Клубууд',cl_ttl:'13 клуб & улам нэмэгдэж байна',cl_dsc:'Спортоос хөгжим хүртэл, аяллаас ном хүртэл — хүн бүрт клуб байдаг.',
     ct_ttl:'Таны нийгэмлэг<br/>хүлээж байна',ct_dsc:'K-Bridge-г өнөөдөр татаад Солонгосын хамгийн хурдацтай өсч буй Монголчуудын нийгэмлэгийн нэг хэсэг болоорой.',
+    ig_tag:'Биднийг дагаарай',ig_ttl:'Instagram дээр холбогдоорой',ig_sub:'Эвент, клуб, нийгэмлэгийн мэдээ',
     fp:'Нууцлалын бодлого',fc:'Холбоо барих',
   },
   ko:{
@@ -757,6 +858,7 @@ const T = {
     c3t:'한국 전역에',c3d:'서울, 부산, 인천 등 한국 전역의 도시에 회원과 이벤트가 있습니다.',
     cl_tag:'우리 클럽',cl_ttl:'13개 클럽 & 계속 성장 중',cl_dsc:'스포츠부터 음악까지, 여행부터 독서까지 — 모두를 위한 클럽이 있습니다.',
     ct_ttl:'당신의 커뮤니티가<br/>기다리고 있습니다',ct_dsc:'지금 K-Bridge를 다운로드하고 한국에서 가장 빠르게 성장하는 몽골인 커뮤니티의 일원이 되세요.',
+    ig_tag:'팔로우하세요',ig_ttl:'인스타그램에서 연결하세요',ig_sub:'이벤트, 클럽, 커뮤니티 소식',
     fp:'개인정보처리방침',fc:'연락처',
   },
   en:{
@@ -783,6 +885,7 @@ const T = {
     c3t:'All Across Korea',c3d:'Members and events in Seoul, Busan, Incheon, and cities across Korea. Wherever you are, we are too.',
     cl_tag:'Our Clubs',cl_ttl:'13 clubs & counting',cl_dsc:'From sports to music, travel to books — there\'s a club for everyone.',
     ct_ttl:'Your community<br/>is waiting',ct_dsc:'Download K-Bridge today and become part of the fastest growing Mongolian community in Korea.',
+    ig_tag:'Follow us',ig_ttl:'Connect on Instagram',ig_sub:'Events, clubs & community updates',
     fp:'Privacy Policy',fc:'Contact',
   }
 };
